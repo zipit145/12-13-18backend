@@ -15,4 +15,19 @@ module.exports = {
     deleteUser(id) {
         return db('users').where('id', id).delete()
     },
+    getAllAccounts() {
+        return db.select('*').from('accounts')
+    },
+    getAccountById(id) {
+        return db('accounts').where('id', id)
+    },
+    createAccount(newAccount) {
+        return db('accounts').insert(newAccount).returning('*')
+    },
+    editAccount(id, account) {
+        return db('accounts').where('id', id).update(account).returning('*')
+    },
+    deleteAccount(id) {
+        return db('accounts').where('id', id).delete()
+    },
 }
