@@ -1,5 +1,7 @@
 const db = require('./database-connection')
 module.exports = {
+    /////////////////////////////////////////////////////////////////////////////////
+    //User Routes
     getAllUsers() {
         return db.select('*').from('users')
     },
@@ -15,6 +17,8 @@ module.exports = {
     deleteUser(id) {
         return db('users').where('id', id).delete()
     },
+    /////////////////////////////////////////////////////////////////////////////////
+    //Account Routes
     getAllAccounts() {
         return db.select('*').from('accounts')
     },
@@ -29,5 +33,22 @@ module.exports = {
     },
     deleteAccount(id) {
         return db('accounts').where('id', id).delete()
+    },
+    /////////////////////////////////////////////////////////////////////////////////
+    //Transaction Routes
+    getAllTransactions() {
+        return db.select('*').from('transactions')
+    },
+    getTransactionById(id) {
+        return db('transactions').where('id', id)
+    },
+    createTransaction(newTransaction) {
+        return db('transactions').insert(newTransaction).returning('*')
+    },
+    editTransaction(id, transaction) {
+        return db('transactions').where('id', id).update(transaction).returning('*')
+    },
+    deleteTransaction(id) {
+        return db('transactions').where('id', id).delete()
     },
 }
