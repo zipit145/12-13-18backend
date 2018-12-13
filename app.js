@@ -10,7 +10,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
 }))
-
+/////////////////////////////////////////////////////////////////////////////////
+//User Routes
 app.get('/users', (req, res) => {
     queries.getAllUsers().then(response => res.send(response))
 })
@@ -28,7 +29,8 @@ app.put('/users/:id', (req, res) => {
 app.delete('/users/:id', (req, res) => {
     queries.deleteUser(req.params.id).then(res.status(204).send())
 })
-
+/////////////////////////////////////////////////////////////////////////////////
+//Account Routes
 app.get('/accounts', (req, res) => {
     queries.getAllAccounts().then(response => res.send(response))
 })
@@ -45,6 +47,25 @@ app.put('/accounts/:id', (req, res) => {
 })
 app.delete('/accounts/:id', (req, res) => {
     queries.deleteAccount(req.params.id).then(res.status(204).send())
+})
+/////////////////////////////////////////////////////////////////////////////////
+//Transaction Routes
+app.get('/transactions', (req, res) => {
+    queries.getAllTransactions().then(response => res.send(response))
+})
+app.get('/transactions/:id', (req, res) => {
+    queries.getTransactionById(req.params.id).then(transaction => res.status(200).send(transaction[0]))
+})
+app.post('/transactions', (req, res) => {
+    queries.createTransaction(req.body).then(transaction => {
+        res.send(transaction[0])
+    })
+})
+app.put('/transactions/:id', (req, res) => {
+    queries.editTransaction(req.params.id, req.body).then(editTransaction => res.json(editTransaction))
+})
+app.delete('/transactions/:id', (req, res) => {
+    queries.deleteTransaction(req.params.id).then(res.status(204).send())
 })
 
 const listener = () => console.log(`Listening on port ${port}`)

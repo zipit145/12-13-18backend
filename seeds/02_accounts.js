@@ -1,5 +1,5 @@
 
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
   return knex('accounts').del()
     .then(function () {
@@ -10,6 +10,12 @@ exports.seed = function(knex, Promise) {
           bank_name: 'piggy banks express',
           acct_type: 'roth ira',
           user_id: 1
+        },
+        {
+          acct_name: 'Gregs gold min',
+          bank_name: 'hole in the dirt',
+          acct_type: 'matress monies',
+          user_id: 2
         },
       ]);
     });

@@ -6,8 +6,6 @@ exports.up = function (knex, Promise) {
         account.string('bank_name')
         account.string('acct_type')
         account.integer('user_id').references('id').inTable('users').onDelete('cascade')
-        //table.integer('user_id').notNullable().references('id').inTable('users').onDelete('cascade');
-        //table.integer('user_id').notNullable().references('id').inTable('users').onDelete('cascade');
     })
 
 };
